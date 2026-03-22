@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiona Mondal – Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue: #2563eb;
+  --blue-hover: #1d4ed8;
+  --blue-soft: #eff6ff;
+  --blue-mid: #bfdbfe;
+  --ink: #0f172a;
+  --ink-2: #1e293b;
+  --ink-3: #334155;
+  --ink-4: #64748b;
+  --ink-5: #94a3b8;
+  --ink-6: #cbd5e1;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --surface-3: #f1f5f9;
+  --border: #e2e8f0;
+  --border-soft: #f1f5f9;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --nav-h: 64px;
+  --max: 1080px;
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --shadow-sm: 0 1px 3px rgba(15,23,42,0.06), 0 1px 2px rgba(15,23,42,0.04);
+  --shadow: 0 4px 16px rgba(15,23,42,0.07), 0 1px 4px rgba(15,23,42,0.04);
+  --shadow-lg: 0 12px 40px rgba(15,23,42,0.10), 0 4px 12px rgba(15,23,42,0.06);
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--sans);
+  background: var(--surface-2);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(226,232,240,0.7);
+  transition: box-shadow 0.3s;
+}
+
+nav.scrolled { box-shadow: var(--shadow); }
+
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-style: italic;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--ink-4);
+  text-decoration: none;
+  padding: 6px 13px;
+  border-radius: 999px;
+  transition: color 0.2s, background 0.2s;
+  letter-spacing: 0.01em;
+}
+
+.nav-links a:hover { color: var(--ink); background: var(--surface-3); }
+.nav-links a.active { color: var(--blue); background: var(--blue-soft); font-weight: 500; }
+
+/* ─── HERO ─── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: calc(var(--nav-h) + 60px) 24px 100px;
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+/* Subtle grid background */
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-soft) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Radial fade over grid */
+#hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 40%, transparent 40%, var(--surface) 100%);
+  pointer-events: none;
+}
+
+.hero-content { position: relative; z-index: 1; }
+
+.hero-avatar {
+  width: 108px; height: 108px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue) 0%, #60a5fa 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--sans);
+  font-size: 26px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 auto 28px;
+  box-shadow: 0 0 0 4px var(--surface), 0 0 0 7px var(--blue-mid);
+  animation: heroAvatarIn 0.7s cubic-bezier(0.34,1.56,0.64,1) both;
+  overflow: hidden;
+  position: relative;
+}
+.hero-avatar img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+@keyframes heroAvatarIn {
+  from { opacity: 0; transform: scale(0.7); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--blue-soft);
+  border: 1px solid var(--blue-mid);
+  color: var(--blue);
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 5px 14px;
+  border-radius: 999px;
+  margin-bottom: 22px;
+  animation: fadeSlideUp 0.5s 0.2s ease both;
+  letter-spacing: 0.01em;
+}
+
+.hero-badge-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--blue);
+  animation: pulse 2.2s infinite;
+}
+
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.45;transform:scale(.8)} }
+
+#hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(48px, 7vw, 82px);
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+  margin-bottom: 14px;
+  animation: fadeSlideUp 0.55s 0.3s ease both;
+}
+
+#hero h1 em {
+  font-style: italic;
+  color: var(--blue);
+}
+
+.hero-degree {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--ink-4);
+  margin-bottom: 18px;
+  animation: fadeSlideUp 0.55s 0.38s ease both;
+}
+
+.hero-degree strong { color: var(--blue); font-weight: 500; }
+
+/* Typewriter */
+.tw-wrap {
+  min-height: 30px;
+  margin-bottom: 36px;
+  animation: fadeSlideUp 0.55s 0.44s ease both;
+}
+
+.tw {
+  font-size: 15px;
+  color: var(--ink-4);
+  font-weight: 300;
+  border-right: 1.5px solid var(--blue);
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  animation: blink .8s step-end infinite;
+}
+@keyframes blink { 0%,100%{border-color:var(--blue)} 50%{border-color:transparent} }
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 44px;
+  animation: fadeSlideUp 0.55s 0.52s ease both;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ink);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--sans);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: var(--shadow-sm);
+  letter-spacing: 0.01em;
+}
+.btn-primary:hover { background: var(--blue); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,99,235,0.3); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--ink-3);
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-family: var(--sans);
+  transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.15s;
+}
+.btn-ghost:hover { border-color: var(--ink-3); color: var(--ink); background: var(--surface-3); transform: translateY(-1px); }
+
+.hero-socials {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  animation: fadeSlideUp 0.55s 0.6s ease both;
+}
+
+.social-btn {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink-4);
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.15s;
+}
+.social-btn:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-soft); transform: translateY(-2px); }
+.social-btn svg { width: 17px; height: 17px; }
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── SECTION SHELL ─── */
+.s { scroll-margin-top: var(--nav-h); }
+.s-white { background: var(--surface); }
+.s-gray  { background: var(--surface-2); }
+
+.s-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 96px 40px;
+}
+
+.s-inner.wide { max-width: 1160px; }
+
+/* Section heading with serif accent */
+.s-label {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.s-label::before {
+  content: '';
+  display: inline-block;
+  width: 24px; height: 1.5px;
+  background: var(--blue);
+  border-radius: 1px;
+}
+
+.s-heading {
+  font-family: var(--serif);
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-bottom: 56px;
+}
+
+.s-heading em { font-style: italic; color: var(--blue); }
+
+/* Centered heading variant */
+.s-heading-center {
+  text-align: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 56px;
+}
+.s-label-center {
+  justify-content: center;
+}
+.s-label-center::before { display: none; }
+.s-label-center::after {
+  content: '';
+  display: inline-block;
+  width: 24px; height: 1.5px;
+  background: var(--blue);
+  border-radius: 1px;
+}
+
+/* ─── ABOUT ─── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 72px;
+  align-items: start;
+}
+
+.about-bio p {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--ink-3);
+  line-height: 1.85;
+}
+.about-bio p + p { margin-top: 18px; }
+
+.about-sidebar {}
+
+.sidebar-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+
+.sidebar-card-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-5);
+  margin-bottom: 16px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+.info-row:last-child { border-bottom: none; }
+.info-icon { font-size: 15px; flex-shrink: 0; width: 22px; text-align: center; }
+.info-body {}
+.info-label { font-size: 10.5px; font-weight: 500; color: var(--ink-5); text-transform: uppercase; letter-spacing: 0.08em; }
+.info-value { font-size: 13.5px; color: var(--ink-2); font-weight: 400; }
+
+.status-pill {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 16px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+}
+.status-dot { width: 8px; height: 8px; border-radius: 50%; background: #16a34a; animation: pulse 2s infinite; flex-shrink: 0; }
+.status-text { font-size: 13px; color: #15803d; font-weight: 500; }
+
+/* ─── SKILLS ─── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.skill-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 24px 24px;
+  transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), #60a5fa);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  border-radius: 0 0 2px 2px;
+}
+
+.skill-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: transparent; }
+.skill-card:hover::after { transform: scaleX(1); }
+
+.skill-card-icon {
+  width: 38px; height: 38px;
+  border-radius: 9px;
+  background: var(--blue-soft);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+  color: var(--blue);
+}
+.skill-card-icon svg { width: 18px; height: 18px; }
+
+.skill-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.skill-tag {
+  padding: 4px 11px;
+  background: var(--surface-3);
+  color: var(--ink-3);
+  font-size: 12px;
+  font-weight: 400;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.skill-card:hover .skill-tag {
+  background: var(--blue-soft);
+  color: var(--blue);
+  border-color: var(--blue-mid);
+}
+
+/* ─── EXPERIENCE ─── */
+.exp-list { display: flex; flex-direction: column; gap: 0; }
+
+.exp-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 40px;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.exp-item:first-child { padding-top: 0; }
+.exp-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+.exp-left {}
+
+.exp-date-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: var(--blue-soft);
+  color: var(--blue);
+  font-size: 11.5px;
+  font-weight: 500;
+  border-radius: 999px;
+  border: 1px solid var(--blue-mid);
+  margin-bottom: 6px;
+}
+
+.exp-org-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--blue);
+  margin-top: 4px;
+}
+
+.exp-right {}
+
+.exp-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.exp-desc {
+  font-size: 14px;
+  color: var(--ink-4);
+  line-height: 1.75;
+  margin-bottom: 14px;
+  font-weight: 300;
+}
+
+.exp-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.exp-bullets li {
+  font-size: 13.5px;
+  color: var(--ink-3);
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.6;
+}
+
+.exp-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 9px;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--blue);
+  opacity: 0.5;
+}
+
+/* ─── EDUCATION ─── */
+.edu-list { display: flex; flex-direction: column; gap: 14px; }
+
+.edu-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+}
+
+.edu-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); border-color: var(--blue-mid); }
+
+.edu-title {
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+
+.edu-org {
+  font-size: 13.5px;
+  color: var(--blue);
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.edu-desc {
+  font-size: 13px;
+  color: var(--ink-4);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.edu-date {
+  font-size: 12px;
+  color: var(--ink-5);
+  white-space: nowrap;
+  flex-shrink: 0;
+  background: var(--surface-3);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 500;
+  border: 1px solid var(--border);
+}
+
+/* ─── PROJECTS ─── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.project-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.25s, transform 0.25s;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+
+.project-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 10px;
+}
+
+.project-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.project-ext-icon {
+  flex-shrink: 0;
+  color: var(--ink-6);
+  transition: color 0.2s;
+}
+.project-card:hover .project-ext-icon { color: var(--blue); }
+.project-ext-icon svg { width: 15px; height: 15px; }
+
+.project-desc {
+  font-size: 13px;
+  color: var(--ink-4);
+  line-height: 1.72;
+  flex: 1;
+  margin-bottom: 16px;
+  font-weight: 300;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.project-tag {
+  padding: 3px 10px;
+  background: var(--surface-3);
+  color: var(--ink-3);
+  font-size: 11.5px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-weight: 400;
+}
+
+/* ─── ACHIEVEMENTS ─── */
+.ach-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.ach-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+}
+
+.ach-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); border-color: var(--blue-mid); }
+
+.ach-icon {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: var(--blue-soft);
+  border: 1px solid var(--blue-mid);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  color: var(--blue);
+}
+.ach-icon svg { width: 17px; height: 17px; }
+
+.ach-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 5px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+.ach-sub {
+  font-size: 12px;
+  color: var(--ink-4);
+  line-height: 1.55;
+  font-weight: 300;
+}
+
+/* ─── CONTACT ─── */
+#contact .s-inner { max-width: 680px; }
+
+.contact-intro {
+  font-size: 15px;
+  color: var(--ink-4);
+  text-align: center;
+  line-height: 1.75;
+  font-weight: 300;
+  margin-top: -36px;
+  margin-bottom: 44px;
+}
+
+.contact-form { display: flex; flex-direction: column; gap: 18px; }
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-2);
+  margin-bottom: 7px;
+  letter-spacing: 0.01em;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 13px 16px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  -webkit-appearance: none;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: var(--ink-6); }
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.08);
+  background: var(--surface);
+}
+.form-group textarea {
+  min-height: 160px;
+  resize: vertical;
+  line-height: 1.65;
+}
+
+.form-submit {
+  width: 100%;
+  padding: 14px;
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--sans);
+  font-size: 14.5px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  letter-spacing: 0.01em;
+}
+.form-submit:hover { background: var(--blue-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,99,235,0.3); }
+.form-submit svg { width: 15px; height: 15px; }
+
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 36px 24px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: var(--radius);
+}
+.form-success-icon { font-size: 40px; margin-bottom: 14px; }
+.form-success-title { font-family: var(--serif); font-size: 22px; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.02em; }
+.form-success-sub { font-size: 14px; color: var(--ink-4); font-weight: 300; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--ink);
+  padding: 36px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-brand {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-style: italic;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: -0.01em;
+}
+
+.footer-links {
+  display: flex;
+  gap: 6px;
+}
+
+.footer-social {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.footer-social:hover { border-color: rgba(255,255,255,0.3); color: #fff; background: rgba(255,255,255,0.07); }
+.footer-social svg { width: 15px; height: 15px; }
+
+.footer-copy {
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ─── SCROLL REVEAL ─── */
+.reveal { opacity: 1; transform: none; }
+.reveal.anim { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.anim.visible { opacity: 1; transform: none; }
+.reveal-d1 { transition-delay: 0.07s; }
+.reveal-d2 { transition-delay: 0.14s; }
+.reveal-d3 { transition-delay: 0.21s; }
+.reveal-d4 { transition-delay: 0.28s; }
+.reveal-d5 { transition-delay: 0.35s; }
+.reveal-d6 { transition-delay: 0.42s; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  nav { padding: 0 24px; }
+  .s-inner { padding: 72px 24px; }
+  .about-grid { grid-template-columns: 1fr; gap: 44px; }
+  .skills-grid { grid-template-columns: 1fr 1fr; }
+  .projects-grid { grid-template-columns: 1fr 1fr; }
+  .ach-grid { grid-template-columns: 1fr; }
+  .exp-item { grid-template-columns: 1fr; gap: 10px; }
+  .edu-card { flex-direction: column; }
+  .edu-date { align-self: flex-start; }
+  footer { padding: 24px; flex-direction: column; gap: 16px; text-align: center; }
+}
+
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .hero-actions { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#hero" class="nav-logo">Kiona Mondal</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="s">
+  <div class="hero-content">
+    <div class="hero-avatar"><img src="data:image/jpeg;base64,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" alt="Kiona Mondal"></div>
+    <div class="hero-badge"><span class="hero-badge-dot"></span>Open to opportunities</div>
+    <h1>Kiona <em>Mondal</em></h1>
+    <p class="hero-degree"><strong>BTech (IT)</strong> &nbsp;·&nbsp; <strong>BBA (IIM Bangalore)</strong></p>
+    <div class="tw-wrap"><span class="tw" id="tw"></span></div>
+    <p style="font-size:14px;color:var(--ink-4);font-weight:300;margin-bottom:36px;">Startup Founder &nbsp;|&nbsp; Business &amp; Finance Enthusiast &nbsp;|&nbsp; Aspiring Investment Banker</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        Get In Touch
+      </a>
+      <a href="#about" class="btn-ghost">View Portfolio</a>
+    </div>
+    <div class="hero-socials">
+      <a href="https://in.linkedin.com/in/kiona-mondal-1b4189288" target="_blank" class="social-btn" title="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="https://www.instagram.com/_kiona.a/" target="_blank" class="social-btn" title="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a href="mailto:kiona.mondal@gmail.com" class="social-btn" title="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="s s-gray">
+  <div class="s-inner">
+    <div class="s-label">About</div>
+    <h2 class="s-heading">A STEM mind drawn to <em>high finance</em></h2>
+    <div class="about-grid">
+      <div class="about-bio reveal">
+        <p>I'm a business and finance enthusiast with a non-traditional journey—from a STEM background into the world of startups, consulting, and high finance.</p>
+        <p>What started as curiosity quickly turned into intent. Through experiences like participating in the Hult Prize and engaging in competitive academic environments, I've developed a strong interest in how businesses are built, scaled, and valued.</p>
+        <p>I'm particularly drawn to roles in investment banking, consulting, and venture capital—spaces where structured thinking meets high-stakes decision-making. I enjoy breaking down complex problems, understanding market behavior, and exploring how capital shapes innovation.</p>
+        <p>Currently, I'm focused on building a strong foundation in finance, business strategy, and analytical thinking, while actively seeking opportunities that challenge me and accelerate my learning.</p>
+        <p>Long term, I aim to work at the intersection of finance and entrepreneurship—contributing to high-impact decisions and eventually building ventures of my own.</p>
+      </div>
+      <div class="about-sidebar reveal reveal-d2">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Quick Info</div>
+          <div class="info-row">
+            <span class="info-icon">📍</span>
+            <div class="info-body"><div class="info-label">Location</div><div class="info-value">Kolkata, India</div></div>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">🎓</span>
+            <div class="info-body"><div class="info-label">Education</div><div class="info-value">IIM Bangalore + TMSL</div></div>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">🎯</span>
+            <div class="info-body"><div class="info-label">Target Roles</div><div class="info-value">IB · Consulting · VC</div></div>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">🏆</span>
+            <div class="info-body"><div class="info-label">Achievements</div><div class="info-value">6+ competition wins</div></div>
+          </div>
+        </div>
+        <div class="status-pill">
+          <div class="status-dot"></div>
+          <div class="status-text">Open to opportunities</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="s s-white">
+  <div class="s-inner wide">
+    <div class="s-label s-label-center">Skills</div>
+    <h2 class="s-heading s-heading-center">What I bring to the table</h2>
+    <div class="skills-grid">
+      <div class="skill-card reveal reveal-d1">
+        <div class="skill-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+        <h3>Business &amp; Finance</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Financial Modelling</span><span class="skill-tag">Valuation</span>
+          <span class="skill-tag">Market Analysis</span><span class="skill-tag">Financial Statement Analysis</span>
+          <span class="skill-tag">Investment Research</span>
+        </div>
+      </div>
+      <div class="skill-card reveal reveal-d2">
+        <div class="skill-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <h3>Product &amp; Strategy</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Product Management</span><span class="skill-tag">Business Strategy</span>
+          <span class="skill-tag">Go-to-Market Strategy</span><span class="skill-tag">Product Analytics</span>
+          <span class="skill-tag">User Research</span>
+        </div>
+      </div>
+      <div class="skill-card reveal reveal-d3">
+        <div class="skill-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <h3>Consulting &amp; Analysis</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Case Studies</span><span class="skill-tag">Problem Solving</span>
+          <span class="skill-tag">Market Research</span><span class="skill-tag">Competitive Analysis</span>
+          <span class="skill-tag">Strategic Planning</span>
+        </div>
+      </div>
+      <div class="skill-card reveal reveal-d4">
+        <div class="skill-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <h3>Technical Skills</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Java</span><span class="skill-tag">C++</span>
+          <span class="skill-tag">HTML</span><span class="skill-tag">CSS</span>
+          <span class="skill-tag">Excel (Advanced)</span><span class="skill-tag">SQL</span>
+        </div>
+      </div>
+      <div class="skill-card reveal reveal-d5">
+        <div class="skill-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <h3>Startup &amp; Entrepreneurship</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Business Development</span><span class="skill-tag">Pitch Deck Creation</span>
+          <span class="skill-tag">Fundraising</span><span class="skill-tag">Startup Operations</span>
+          <span class="skill-tag">Team Building</span>
+        </div>
+      </div>
+      <div class="skill-card reveal reveal-d6">
+        <div class="skill-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <h3>Leadership &amp; Soft Skills</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Public Speaking</span><span class="skill-tag">Negotiation</span>
+          <span class="skill-tag">Leadership</span><span class="skill-tag">Team Management</span>
+          <span class="skill-tag">Critical Thinking</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="s s-gray">
+  <div class="s-inner">
+    <div class="s-label">Experience</div>
+    <h2 class="s-heading">Work &amp; <em>leadership</em></h2>
+    <div class="exp-list">
+      <div class="exp-item reveal">
+        <div class="exp-left">
+          <div class="exp-date-badge">Present</div>
+          <div class="exp-org-name">EmBed (Startup)</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-title">Founder</div>
+          <div class="exp-desc">Founded and leading a startup focused on innovative solutions. Responsible for overall vision, strategy, and execution from ideation to implementation.</div>
+          <ul class="exp-bullets">
+            <li>Built product from ground up and established go-to-market strategy</li>
+            <li>Managing end-to-end operations including product, marketing, and finance</li>
+            <li>Secured early-stage traction and validating product-market fit</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item reveal reveal-d1">
+        <div class="exp-left">
+          <div class="exp-date-badge">Present</div>
+          <div class="exp-org-name">Zentheon Corporation</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-title">CMO / CFO</div>
+          <div class="exp-desc">Dual role managing marketing strategy and financial operations for a growing startup. Driving growth initiatives while maintaining financial discipline.</div>
+          <ul class="exp-bullets">
+            <li>Developed and executed comprehensive marketing campaigns</li>
+            <li>Managed financial planning, budgeting, and investor relations</li>
+            <li>Contributed to strategic decision-making at executive level</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item reveal reveal-d2">
+        <div class="exp-left">
+          <div class="exp-date-badge">Present</div>
+          <div class="exp-org-name">IIC TMSL</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-title">Startup Mentor</div>
+          <div class="exp-desc">Mentoring early-stage startups and student entrepreneurs. Guiding teams through ideation, validation, and execution phases.</div>
+          <ul class="exp-bullets">
+            <li>Mentored 10+ student startups on business strategy and execution</li>
+            <li>Conducted workshops on entrepreneurship and innovation</li>
+            <li>Helped teams prepare for pitch competitions and funding rounds</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item reveal reveal-d3">
+        <div class="exp-left">
+          <div class="exp-date-badge">Present</div>
+          <div class="exp-org-name">Eclectica Literary Club</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-title">Organizing Committee Member</div>
+          <div class="exp-desc">Part of the organizing team for one of the premier literary clubs. Managing events, competitions, and collaborative initiatives.</div>
+          <ul class="exp-bullets">
+            <li>Organized inter-college MUNs and literary events</li>
+            <li>Coordinated with external stakeholders and sponsors</li>
+            <li>Led team initiatives and improved event participation by 40%</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="s s-white">
+  <div class="s-inner">
+    <div class="s-label">Education</div>
+    <h2 class="s-heading">Academic <em>foundation</em></h2>
+    <div class="edu-list">
+      <div class="edu-card reveal">
+        <div class="edu-left">
+          <div class="edu-title">BBA – Dual Degree in Business Excellence (DBE)</div>
+          <div class="edu-org">Indian Institute of Management, Bangalore</div>
+          <div class="edu-desc">Premier business program combining management education with undergraduate studies · Focus on Finance, Strategy, and Entrepreneurship</div>
+        </div>
+        <div class="edu-date">2024 – Present</div>
+      </div>
+      <div class="edu-card reveal reveal-d1">
+        <div class="edu-left">
+          <div class="edu-title">BTech in Information Technology</div>
+          <div class="edu-org">Techno Main Salt Lake, Kolkata</div>
+          <div class="edu-desc">Core coursework in Computer Science, Programming, and Technology · Active member of Innovation Council</div>
+        </div>
+        <div class="edu-date">2023 – Present</div>
+      </div>
+      <div class="edu-card reveal reveal-d2">
+        <div class="edu-left">
+          <div class="edu-title">McKinsey Forward Program</div>
+          <div class="edu-org">McKinsey &amp; Company</div>
+          <div class="edu-desc">Executive education program focused on business leadership, strategic thinking, and problem-solving frameworks</div>
+        </div>
+        <div class="edu-date">2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="s s-gray">
+  <div class="s-inner wide">
+    <div class="s-label">Projects</div>
+    <h2 class="s-heading">Featured <em>work</em></h2>
+    <div class="projects-grid">
+      <div class="project-card reveal reveal-d1">
+        <div class="project-card-header">
+          <div class="project-title">AGILE COIL – Social Entrepreneurship Program</div>
+          <div class="project-ext-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></div>
+        </div>
+        <div class="project-desc">Exchange student from IIM Bangalore working on social entrepreneurship initiative in collaboration with Hiroshima University, Japan. Focused on sustainable business models.</div>
+        <div class="project-tags"><span class="project-tag">Social Impact</span><span class="project-tag">Business Strategy</span><span class="project-tag">International</span></div>
+      </div>
+      <div class="project-card reveal reveal-d2">
+        <div class="project-card-header">
+          <div class="project-title">EmBed – Startup Venture</div>
+          <div class="project-ext-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></div>
+        </div>
+        <div class="project-desc">Founded and building a tech-enabled platform addressing real market needs. Leading product development, business strategy, and fundraising efforts.</div>
+        <div class="project-tags"><span class="project-tag">Entrepreneurship</span><span class="project-tag">Product Dev</span><span class="project-tag">Business Model</span></div>
+      </div>
+      <div class="project-card reveal reveal-d3">
+        <div class="project-card-header">
+          <div class="project-title">Hult Prize 2025 – Winning Pitch</div>
+          <div class="project-ext-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></div>
+        </div>
+        <div class="project-desc">Developed social enterprise solution for global challenge. Won on-campus competition and represented college at nationals in IIT Bombay.</div>
+        <div class="project-tags"><span class="project-tag">Social Enterprise</span><span class="project-tag">Pitch Deck</span><span class="project-tag">Impact Business</span></div>
+      </div>
+      <div class="project-card reveal reveal-d4">
+        <div class="project-card-header">
+          <div class="project-title">National Public Policy Case Study</div>
+          <div class="project-ext-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></div>
+        </div>
+        <div class="project-desc">Analyzed policy challenges and proposed solutions at national hackathon (IIMC &amp; IIFT). Secured 2nd runners-up position among top teams.</div>
+        <div class="project-tags"><span class="project-tag">Policy Analysis</span><span class="project-tag">Research</span><span class="project-tag">Strategic Thinking</span></div>
+      </div>
+      <div class="project-card reveal reveal-d5">
+        <div class="project-card-header">
+          <div class="project-title">Product Management Case Competition</div>
+          <div class="project-ext-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></div>
+        </div>
+        <div class="project-desc">Led product strategy and go-to-market planning for case competition at FMS Delhi. Finished as 2nd runners-up among competitive teams.</div>
+        <div class="project-tags"><span class="project-tag">Product Strategy</span><span class="project-tag">Market Analysis</span><span class="project-tag">GTM Planning</span></div>
+      </div>
+      <div class="project-card reveal reveal-d6">
+        <div class="project-card-header">
+          <div class="project-title">Financial Modelling Projects</div>
+          <div class="project-ext-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></div>
+        </div>
+        <div class="project-desc">Built comprehensive financial models for startups including valuation, scenario analysis, and investment projections.</div>
+        <div class="project-tags"><span class="project-tag">Excel</span><span class="project-tag">Valuation</span><span class="project-tag">DCF</span><span class="project-tag">Financial Analysis</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="s s-white">
+  <div class="s-inner wide">
+    <div class="s-label s-label-center">Recognition</div>
+    <h2 class="s-heading s-heading-center">Achievements &amp; <em>certifications</em></h2>
+    <div class="ach-grid">
+      <div class="ach-card reveal reveal-d1">
+        <div class="ach-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+        <div><div class="ach-title">2nd Runners Up – National Public Policy Hackathon</div><div class="ach-sub">IIM Calcutta × IIFT Kolkata · Mar 2026</div></div>
+      </div>
+      <div class="ach-card reveal reveal-d2">
+        <div class="ach-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+        <div><div class="ach-title">2nd Runners Up – ProdPro Product Management Case Competition</div><div class="ach-sub">FMS Delhi · Feb 2026</div></div>
+      </div>
+      <div class="ach-card reveal reveal-d3">
+        <div class="ach-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+        <div><div class="ach-title">Hult Prize Nationals Finalist</div><div class="ach-sub">The Hult Prize Organisation · IIT Bombay · Apr 2025</div></div>
+      </div>
+      <div class="ach-card reveal reveal-d4">
+        <div class="ach-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+        <div><div class="ach-title">Winner – Hult Prize On-Campus 2025</div><div class="ach-sub">The Hult Prize Foundation · Feb 2025 · Campus champion advancing to nationals</div></div>
+      </div>
+      <div class="ach-card reveal reveal-d5">
+        <div class="ach-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+        <div><div class="ach-title">Honourable Mention – Eclectica MUN</div><div class="ach-sub">Mar 2025 · Third position in inter-college Model United Nations</div></div>
+      </div>
+      <div class="ach-card reveal reveal-d6">
+        <div class="ach-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+        <div><div class="ach-title">High Commendation – Global Model United Nations</div><div class="ach-sub">IIT Kharagpur · UNHRC Committee · 2nd position</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="s s-gray">
+  <div class="s-inner">
+    <div class="s-label s-label-center">Contact</div>
+    <h2 class="s-heading s-heading-center">Let's <em>connect</em></h2>
+    <p class="contact-intro">I'm actively seeking opportunities in Investment Banking, Consulting, Venture Capital, and Product Management. Open to full-time roles, internships, and collaborative projects.</p>
+    <div class="contact-form" id="cf">
+      <div class="form-group reveal">
+        <label for="cn">Name</label>
+        <input type="text" id="cn" placeholder="Your name">
+      </div>
+      <div class="form-group reveal reveal-d1">
+        <label for="ce">Email</label>
+        <input type="email" id="ce" placeholder="your.email@example.com">
+      </div>
+      <div class="form-group reveal reveal-d2">
+        <label for="cm">Message</label>
+        <textarea id="cm" placeholder="Your message..."></textarea>
+      </div>
+      <button class="form-submit reveal reveal-d3" onclick="sendMsg()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        Send Message
+      </button>
+    </div>
+    <div class="form-success" id="fs">
+      <div class="form-success-icon">✅</div>
+      <div class="form-success-title">Message sent!</div>
+      <div class="form-success-sub">Thanks for reaching out — I'll get back to you soon.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Kiona Mondal</div>
+  <div class="footer-links">
+    <a href="https://in.linkedin.com/in/kiona-mondal-1b4189288" target="_blank" class="footer-social">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a href="https://www.instagram.com/_kiona.a/" target="_blank" class="footer-social">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    </a>
+    <a href="mailto:kiona.mondal@gmail.com" class="footer-social">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </a>
+  </div>
+  <div class="footer-copy">© 2026 Kiona Mondal · Kolkata, India</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Typewriter
+const phrases = ["Startup Founder | Business & Finance Enthusiast","Aspiring Investment Banker","Consulting & Venture Capital Explorer","Hult Prize Nationals Finalist · IIT Bombay"];
+let pi=0,ci=0,del=false;
+const el=document.getElementById('tw');
+function tw(){
+  const cur=phrases[pi];
+  if(!del){el.textContent=cur.slice(0,++ci);if(ci===cur.length){del=true;setTimeout(tw,2000);return;}}
+  else{el.textContent=cur.slice(0,--ci);if(ci===0){del=false;pi=(pi+1)%phrases.length;}}
+  setTimeout(tw,del?36:65);
+}
+setTimeout(tw,800);
+
+// Nav scroll shadow + active link
+const nav=document.getElementById('main-nav');
+const sects=document.querySelectorAll('section[id]');
+const links=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',window.scrollY>10);
+  let cur='';
+  sects.forEach(s=>{if(window.scrollY>=s.offsetTop-90)cur=s.id;});
+  links.forEach(a=>{
+    const active=a.getAttribute('href')==='#'+cur;
+    a.classList.toggle('active',active);
+  });
+},{passive:true});
+
+// Scroll reveal
+(function() {
+  function init() {
+    var els = document.querySelectorAll('.reveal');
+    els.forEach(function(el) { el.classList.add('anim'); });
+    function check() {
+      var vh = window.innerHeight || 800;
+      els.forEach(function(el) {
+        if (el.getBoundingClientRect().top < vh - 30) {
+          el.classList.add('visible');
+        }
+      });
+    }
+    check();
+    window.addEventListener('scroll', check, { passive: true });
+    setTimeout(function() {
+      els.forEach(function(el) { el.classList.add('visible'); });
+    }, 2000);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+// Contact form
+function sendMsg(){
+  const n=document.getElementById('cn').value.trim();
+  const e=document.getElementById('ce').value.trim();
+  const m=document.getElementById('cm').value.trim();
+  if(!n||!e||!m){alert('Please fill in all fields.');return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)){alert('Please enter a valid email.');return;}
+  document.getElementById('cf').style.display='none';
+  const s=document.getEl
